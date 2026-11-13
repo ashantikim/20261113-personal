@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATELIER LUMIÈRE | 서양화가 윤서연 포트폴리오</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond, Noto Serif KR, Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gallery: {
+                            cream: '#FAF8F5',
+                            ivory: '#F3EFEA',
+                            beige: '#E8E1D5',
+                            charcoal: '#262422',
+                            muted: '#68635E',
+                            gold: '#A6895B',
+                            goldLight: '#C5AC82',
+                            goldDark: '#856B41',
+                            border: '#DFD7C8'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif KR"', 'serif'],
+                        display: ['"Cormorant Garamond"', '"Noto Serif KR"', 'serif'],
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'frame': '0 18px 40px -12px rgba(38, 36, 34, 0.14), 0 4px 12px -2px rgba(38, 36, 34, 0.06)',
+                        'museum': '0 25px 50px -12px rgba(133, 107, 65, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Minimal Styles for Classical Frame & Smooth Transitions -->
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #262422;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+        }
+        .fade-in {
+            animation: fadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* 고풍스러운 액자 매트보드 및 금장 테두리 효과 */
+        .classical-frame {
+            background: #FFFFFF;
+            padding: 14px;
+            border: 1px solid #DFD7C8;
+            box-shadow: 
+                inset 0 0 0 1px #F3EFEA,
+                inset 0 0 0 6px #FAF8F5,
+                inset 0 0 0 7px rgba(166, 137, 91, 0.35),
+                0 14px 30px -10px rgba(38, 36, 34, 0.12);
+            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+        }
+        .classical-frame:hover {
+            transform: translateY(-6px);
+            box-shadow: 
+                inset 0 0 0 1px #F3EFEA,
+                inset 0 0 0 6px #FAF8F5,
+                inset 0 0 0 7px rgba(166, 137, 91, 0.65),
+                0 24px 45px -12px rgba(38, 36, 34, 0.18);
+        }
+        /* 커스텀 스크롤바 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D5CBB8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A6895B;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-gallery-gold/20 selection:text-gallery-charcoal">
+
+    <!-- 상단 고정 네비게이션 헤더 -->
+    <header class="sticky top-0 z-40 bg-gallery-cream/90 backdrop-blur-md border-b border-gallery-border/80 transition-all">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <!-- 로고 / 작가명 -->
+                <button onclick="navigateTo('home')" class="text-left group focus:outline-none">
+                    <span class="block font-display text-2xl sm:text-3xl tracking-[0.14em] font-semibold text-gallery-charcoal group-hover:text-gallery-gold transition-colors">
+                        ATELIER LUMIÈRE
+                    </span>
+                    <span class="block font-serif text-[11px] tracking-[0.25em] text-gallery-muted mt-0.5">
+                        서양화가 윤서연 · YOON SEOYEON
+                    </span>
+                </button>
+
+                <!-- 데스크톱 네비게이션 메뉴 (홈, 자기소개, 작품소개, 방명록) -->
+                <nav class="hidden md:flex items-center space-x-10" aria-label="Main Navigation">
+                    <button onclick="navigateTo('home')" data-nav="home" class="nav-link relative py-2 font-serif text-[15px] tracking-widest transition-colors text-gallery-charcoal">
+                        홈
+                        <span class="nav-indicator absolute bottom-0 left-0 w-full h-[1.5px] bg-gallery-gold transition-transform duration-300 origin-left scale-x-100"></span>
+                    </button>
+                    <button onclick="navigateTo('about')" data-nav="about" class="nav-link relative py-2 font-serif text-[15px] tracking-widest transition-colors text-gallery-muted hover:text-gallery-charcoal">
+                        자기소개
+                        <span class="nav-indicator absolute bottom-0 left-0 w-full h-[1.5px] bg-gallery-gold transition-transform duration-300 origin-left scale-x-0"></span>
+                    </button>
+                    <button onclick="navigateTo('works')" data-nav="works" class="nav-link relative py-2 font-serif text-[15px] tracking-widest transition-colors text-gallery-muted hover:text-gallery-charcoal">
+                        작품소개
+                        <span class="nav-indicator absolute bottom-0 left-0 w-full h-[1.5px] bg-gallery-gold transition-transform duration-300 origin-left scale-x-0"></span>
+                    </button>
+                    <button onclick="navigateTo('guestbook')" data-nav="guestbook" class="nav-link relative py-2 font-serif text-[15px] tracking-widest transition-colors text-gallery-muted hover:text-gallery-charcoal">
+                        방명록
+                        <span class="nav-indicator absolute bottom-0 left-0 w-full h-[1.5px] bg-gallery-gold transition-transform duration-300 origin-left scale-x-0"></span>
+                    </button>
+                </nav>
+
+                <!-- 모바일 메뉴 버튼 -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-lg text-gallery-charcoal hover:bg-gallery-ivory focus:outline-none" aria-label="메뉴 열기">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 드롭다운 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gallery-cream border-b border-gallery-border px-6 py-4 space-y-2 shadow-sm">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" data-mobile-nav="home" class="block w-full text-left py-2.5 px-3 rounded-lg font-serif text-base text-gallery-gold font-medium bg-gallery-ivory/70">홈</button>
+            <button onclick="navigateTo('about'); toggleMobileMenu();" data-mobile-nav="about" class="block w-full text-left py-2.5 px-3 rounded-lg font-serif text-base text-gallery-charcoal hover:bg-gallery-ivory/50">자기소개</button>
+            <button onclick="navigateTo('works'); toggleMobileMenu();" data-mobile-nav="works" class="block w-full text-left py-2.5 px-3 rounded-lg font-serif text-base text-gallery-charcoal hover:bg-gallery-ivory/50">작품소개</button>
+            <button onclick="navigateTo('guestbook'); toggleMobileMenu();" data-mobile-nav="guestbook" class="block w-full text-left py-2.5 px-3 rounded-lg font-serif text-base text-gallery-charcoal hover:bg-gallery-ivory/50">방명록</button>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 (4개 페이지 뷰 전환) -->
+    <main class="flex-grow">
+
+        <!-- =========================================================
+             PAGE 1: 홈 (HOME - 첫 랜딩페이지)
+             ========================================================= -->
+        <section id="page-home" class="page-view fade-in">
+            <!-- 히어로 섹션: 고풍스러운 유럽 미술관 외관과 밝고 우아한 오버레이 -->
+            <div class="relative w-full min-h-[82vh] flex items-center justify-center overflow-hidden border-b border-gallery-border">
+                <!-- 배경 이미지: 클래식 유럽 박물관 건축 외관 -->
+                <img 
+                    src="https://images.unsplash.com/photo-1565060169194-19fabf63012c?auto=format&fit=crop&w=2000&q=85" 
+                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=2000&q=80';"
+                    alt="고풍스러운 유럽 미술관의 클래식 건축 외관" 
+                    class="absolute inset-0 w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
+                >
+                <!-- 밝고 화사한 크림-아이보리 그라데이션 오버레이 -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/82 via-[#FAF8F5]/75 to-[#FAF8F5]/95"></div>
+                <div class="absolute inset-0 bg-radial from-transparent to-[#F3EFEA]/40"></div>
+
+                <!-- 고전적 장식 프레임 라인 -->
+                <div class="relative z-10 max-w-4xl mx-auto px-6 py-16 sm:py-24 text-center">
+                    <div class="inline-flex items-center space-x-3 mb-6">
+                        <span class="h-[1px] w-8 sm:w-12 bg-gallery-gold"></span>
+                        <span class="font-display text-xs sm:text-sm uppercase tracking-[0.3em] text-gallery-goldDark font-semibold">
+                            Fine Art & Oil Painting Portfolio
+                        </span>
+                        <span class="h-[1px] w-8 sm:w-12 bg-gallery-gold"></span>
+                    </div>
+
+                    <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-medium text-gallery-charcoal leading-[1.3] tracking-tight mb-6">
+                        빛과 색채로 기록하는<br>
+                        <span class="text-gallery-goldDark italic font-normal">고요한 시간의 결</span>
+                    </h1>
+
+                    <p class="font-serif text-base sm:text-lg text-gallery-charcoal/85 max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                        고전 유럽 회화의 깊이 있는 마티에르와 현대적 빛의 해석을 캔버스 위에 담아냅니다.<br class="hidden sm:inline">
+                        서양화가 윤서연의 아틀리에에 오신 것을 환영합니다.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button onclick="navigateTo('works')" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-gallery-charcoal text-gallery-cream font-serif text-sm tracking-widest hover:bg-gallery-goldDark transition-all duration-300 shadow-md hover:shadow-lg">
+                            작품 감상하기
+                        </button>
+                        <button onclick="navigateTo('about')" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/85 backdrop-blur-sm border border-gallery-gold/50 text-gallery-charcoal font-serif text-sm tracking-widest hover:bg-gallery-ivory transition-all duration-300">
+                            작가 노트 읽기
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 대표작 프리뷰 섹션 (Selected Works) -->
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 border-b border-gallery-border pb-6">
+                    <div>
+                        <span class="font-display text-sm tracking-[0.25em] text-gallery-gold uppercase block mb-2">Selected Masterpieces</span>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-gallery-charcoal">대표 소장 및 전시작</h2>
+                    </div>
+                    <button onclick="navigateTo('works')" class="mt-4 md:mt-0 inline-flex items-center font-serif text-sm text-gallery-goldDark hover:text-gallery-charcoal transition-colors group">
+                        <span>전체 갤러리 둘러보기</span>
+                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- 3개의 대표작 카드 (클릭 시 라이트박스 모달 연동) -->
+                <div id="home-featured-works" class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+                    <!-- JS로 렌더링 -->
+                </div>
+            </div>
+
+            <!-- 현재 및 예정 전시 안내 요약 섹션 -->
+            <div class="bg-gallery-ivory/80 border-t border-b border-gallery-border py-20">
+                <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+                    <div class="bg-gallery-cream rounded-2xl border border-gallery-border p-8 sm:p-12 shadow-museum">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            <div class="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-gallery-border pb-6 lg:pb-0 lg:pr-8">
+                                <span class="inline-block px-3 py-1 rounded-full bg-gallery-gold/15 text-gallery-goldDark font-serif text-xs tracking-wider mb-3">
+                                    SOLO EXHIBITION 2026
+                                </span>
+                                <h3 class="font-serif text-2xl sm:text-3xl font-medium text-gallery-charcoal leading-snug">
+                                    제12회 개인전<br>《오후의 정원, 빛의 잔상》
+                                </h3>
+                                <p class="font-display text-sm tracking-widest text-gallery-muted mt-2 uppercase">
+                                    Traces of Afternoon Light
+                                </p>
+                            </div>
+                            <div class="lg:col-span-5 space-y-3 text-sm sm:text-base">
+                                <div class="flex items-start">
+                                    <span class="font-serif text-gallery-goldDark w-24 shrink-0 font-medium">전시 기간</span>
+                                    <span class="text-gallery-charcoal">2026년 11월 10일 — 12월 20일 (매주 월요일 휴관)</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="font-serif text-gallery-goldDark w-24 shrink-0 font-medium">전시 장소</span>
+                                    <span class="text-gallery-charcoal">서울 종로구 삼청로 갤러리 뤼미에르 제1·2전시관</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="font-serif text-gallery-goldDark w-24 shrink-0 font-medium">관람 시간</span>
+                                    <span class="text-gallery-charcoal">10:30 AM — 06:30 PM (무료 관람 · 도슨트 오후 2시)</span>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-3 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
+                                <button onclick="navigateTo('guestbook')" class="w-full py-3.5 px-6 rounded-lg bg-gallery-gold text-white font-serif text-sm tracking-wider hover:bg-gallery-goldDark transition-colors text-center shadow-sm">
+                                    전시 방명록 남기기
+                                </button>
+                                <button onclick="navigateTo('about')" class="w-full py-3.5 px-6 rounded-lg border border-gallery-border bg-white text-gallery-charcoal font-serif text-sm tracking-wider hover:bg-gallery-ivory transition-colors text-center">
+                                    작가 이력 보기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             PAGE 2: 자기소개 (ABOUT - 에디토리얼 레이아웃)
+             ========================================================= -->
+        <section id="page-about" class="page-view hidden fade-in">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
+                <!-- 페이지 상단 타이틀 -->
+                <div class="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+                    <span class="font-display text-sm tracking-[0.3em] text-gallery-gold uppercase block mb-2">Artist Biography & Statement</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-medium text-gallery-charcoal mb-4">작가 소개</h1>
+                    <div class="w-12 h-[1px] bg-gallery-gold mx-auto"></div>
+                </div>
+
+                <!-- 1. 작가 프로필 & 작가 노트 (Artist Statement) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-24">
+                    <!-- 왼쪽: 아틀리에 분위기 프로필 이미지 -->
+                    <div class="lg:col-span-5">
+                        <div class="classical-frame rounded-xl overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1000&q=85" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1000/F3EFEA/68635E?text=Atelier+Portrait';"
+                                alt="서양화가 윤서연의 아틀리에와 유화 캔버스" 
+                                class="w-full h-[460px] object-cover rounded-lg"
+                            >
+                        </div>
+                        <div class="mt-5 text-center">
+                            <p class="font-serif text-lg font-medium text-gallery-charcoal">윤 서 연 · Yoon Seoyeon</p>
+                            <p class="font-display text-sm tracking-widest text-gallery-muted mt-0.5">Western Painter / Oil on Canvas</p>
+                        </div>
+                    </div>
+
+                    <!-- 오른쪽: 작가 노트 -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="font-display text-xs tracking-[0.25em] text-gallery-goldDark uppercase font-semibold">Artist Statement</span>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-gallery-charcoal leading-snug">
+                            “캔버스 위에 겹겹이 쌓아 올린 유화 물감은<br>
+                            사라져가는 순간의 온기를 붙잡는 시간의 지층입니다.”
+                        </h2>
+                        <div class="space-y-4 font-serif text-gallery-charcoal/85 text-[15px] sm:text-base leading-[1.95] font-light">
+                            <p>
+                                안녕하세요. 빛과 공기, 그리고 시간이 머무는 풍경과 정물을 그리는 서양화가 윤서연입니다. 파리와 서울을 오가며 고전 유럽 회화의 정통 유화 기법을 수학한 이래, 저는 눈앞에 보이는 사물의 외형 너머에 존재하는 ‘빛의 여운’을 캔버스에 옮기는 작업에 천착해 왔습니다.
+                            </p>
+                            <p>
+                                린시드 오일과 천연 안료를 직접 배합하여 얇은 반투명 층을 수십 번 겹쳐 칠하는 글레이징(Glazing) 기법과, 나이프와 붓의 밀도 높은 터치로 질감을 살리는 임파스토(Impasto) 기법을 조화롭게 사용합니다. 이를 통해 관람자가 작품 앞에 섰을 때, 아침의 투명한 햇살부터 해 질 녘의 따스한 금빛 잔상까지 공간의 온도를 온전히 느끼기를 소망합니다.
+                            </p>
+                            <p>
+                                빠르게 흘러가는 현대의 일상 속에서 저의 그림이 잠시 숨을 고르고 사유할 수 있는 고요한 미술관의 한 모퉁이가 되기를 바랍니다.
+                            </p>
+                        </div>
+                        <!-- 서명 느낌의 장식 -->
+                        <div class="pt-4 border-t border-gallery-border flex items-center justify-between">
+                            <div>
+                                <p class="text-xs text-gallery-muted">작업실 · Studio</p>
+                                <p class="font-serif text-sm text-gallery-charcoal mt-0.5">서울특별시 종로구 평창동 아틀리에 뤼미에르</p>
+                            </div>
+                            <span class="font-display italic text-2xl text-gallery-goldDark pr-2">Seoyeon Yoon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 작업 철학 및 회화 기법 (3단 카드) -->
+                <div class="mb-24">
+                    <div class="text-center mb-12">
+                        <span class="font-display text-xs tracking-[0.25em] text-gallery-gold uppercase">Artistic Philosophy & Technique</span>
+                        <h3 class="font-serif text-2xl font-medium text-gallery-charcoal mt-1">작업 철학과 회화 기법</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-2xl border border-gallery-border p-8 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-10 h-10 rounded-full bg-gallery-ivory flex items-center justify-center text-gallery-goldDark font-display text-xl font-semibold mb-5">I</div>
+                            <h4 class="font-serif text-lg font-medium text-gallery-charcoal mb-3">고전 글레이징 기법 (Glazing)</h4>
+                            <p class="text-sm text-gallery-muted leading-relaxed">
+                                투명한 유화 안료 층을 건조와 채색을 반복하며 겹쳐 올려, 내부에서 은은하게 배어 나오는 깊이 있는 발색과 고풍스러운 광택을 구현합니다.
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-2xl border border-gallery-border p-8 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-10 h-10 rounded-full bg-gallery-ivory flex items-center justify-center text-gallery-goldDark font-display text-xl font-semibold mb-5">II</div>
+                            <h4 class="font-serif text-lg font-medium text-gallery-charcoal mb-3">빛과 색채의 인상주의적 해석</h4>
+                            <p class="text-sm text-gallery-muted leading-relaxed">
+                                계절과 시간대에 따라 시시각각 변하는 자연광의 미세한 색온도를 포착하여, 따뜻한 아이보리와 금빛, 차분한 코발트 블루의 조화로 풀어냅니다.
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-2xl border border-gallery-border p-8 shadow-sm hover:shadow-md transition-shadow">
+                            <div class="w-10 h-10 rounded-full bg-gallery-ivory flex items-center justify-center text-gallery-goldDark font-display text-xl font-semibold mb-5">III</div>
+                            <h4 class="font-serif text-lg font-medium text-gallery-charcoal mb-3">생동하는 마티에르 (Matière)</h4>
+                            <p class="text-sm text-gallery-muted leading-relaxed">
+                                리넨 캔버스 위에 젯소 마감부터 직접 준비하며, 붓의 결이 살아있는 두터운 물감층을 통해 회화만이 줄 수 있는 촉각적 생명력을 부여합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 주요 학력 및 전시 연혁 (Timeline) -->
+                <div class="bg-gallery-ivory/70 rounded-2xl border border-gallery-border p-8 sm:p-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                        <div class="lg:col-span-4">
+                            <span class="font-display text-xs tracking-[0.25em] text-gallery-gold uppercase">Curriculum Vitae</span>
+                            <h3 class="font-serif text-2xl font-medium text-gallery-charcoal mt-1 mb-3">학력 및 주요 연혁</h3>
+                            <p class="text-sm text-gallery-muted leading-relaxed">
+                                국내외 주요 미술관과 갤러리에서 다수의 개인전 및 기획 단체전을 통해 작품을 선보여 왔습니다.
+                            </p>
+                        </div>
+
+                        <div class="lg:col-span-8 space-y-8 border-l border-gallery-gold/40 pl-6 sm:pl-8">
+                            <!-- 학력 -->
+                            <div class="relative">
+                                <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-gallery-gold ring-4 ring-gallery-cream"></span>
+                                <h4 class="font-serif text-base font-semibold text-gallery-goldDark mb-3">학력 (Education)</h4>
+                                <ul class="space-y-2 text-sm text-gallery-charcoal">
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2014</span> 프랑스 파리 국립고등미술학교(École Nationale Supérieure des Beaux-Arts) 회화과 석사 졸업</li>
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2011</span> 서울대학교 미술대학 서양화과 학사 졸업</li>
+                                </ul>
+                            </div>
+
+                            <!-- 주요 개인전 -->
+                            <div class="relative">
+                                <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-gallery-gold ring-4 ring-gallery-cream"></span>
+                                <h4 class="font-serif text-base font-semibold text-gallery-goldDark mb-3">주요 개인전 (Solo Exhibitions)</h4>
+                                <ul class="space-y-2.5 text-sm text-gallery-charcoal">
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2026</span> 《오후의 정원, 빛의 잔상》 — 갤러리 뤼미에르, 서울</li>
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2024</span> 《고요한 오후의 변주》 — 예술의전당 한가람미술관, 서울</li>
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2022</span> 《Lumière Silencieuse》 — Galerie Saint-Germain, 파리</li>
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2020</span> 《시간이 머무는 창가》 — 금호미술관, 서울</li>
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2018</span> 《색채의 기억》 — 조현화랑, 부산</li>
+                                </ul>
+                            </div>
+
+                            <!-- 수상 및 소장 -->
+                            <div class="relative">
+                                <span class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3 h-3 rounded-full bg-gallery-gold ring-4 ring-gallery-cream"></span>
+                                <h4 class="font-serif text-base font-semibold text-gallery-goldDark mb-3">수상 및 작품 소장 (Awards & Collections)</h4>
+                                <ul class="space-y-2 text-sm text-gallery-charcoal">
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">2023</span> 대한민국 미술대전 서양화 부문 우수상</li>
+                                    <li><span class="font-display font-semibold text-gallery-muted mr-3">소장처</span> 국립현대미술관 미술은행, 서울시립미술관, 주프랑스 한국문화원 외 개인 소장 다수</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             PAGE 3: 작품소개 (WORKS / GALLERY - 필터링 & 라이트박스 모달)
+             ========================================================= -->
+        <section id="page-works" class="page-view hidden fade-in">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
+                <!-- 페이지 헤더 -->
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="font-display text-sm tracking-[0.3em] text-gallery-gold uppercase block mb-2">Exhibition Catalogue</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-medium text-gallery-charcoal mb-4">작품 소개</h1>
+                    <p class="font-serif text-sm sm:text-base text-gallery-muted font-light">
+                        작품을 클릭하시면 고해상도 원화와 작품에 담긴 작가의 해설을 상세히 감상하실 수 있습니다.
+                    </p>
+                </div>
+
+                <!-- 카테고리 필터 버튼 -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-14" role="tablist" aria-label="작품 카테고리 필터">
+                    <button onclick="filterWorks('all')" data-filter="all" class="filter-btn px-6 py-2.5 rounded-full font-serif text-sm tracking-wider transition-all bg-gallery-charcoal text-gallery-cream shadow-sm">
+                        전체 작품 (All)
+                    </button>
+                    <button onclick="filterWorks('landscape')" data-filter="landscape" class="filter-btn px-6 py-2.5 rounded-full font-serif text-sm tracking-wider transition-all bg-white border border-gallery-border text-gallery-muted hover:text-gallery-charcoal hover:border-gallery-gold">
+                        풍경화 (Landscape)
+                    </button>
+                    <button onclick="filterWorks('still-life')" data-filter="still-life" class="filter-btn px-6 py-2.5 rounded-full font-serif text-sm tracking-wider transition-all bg-white border border-gallery-border text-gallery-muted hover:text-gallery-charcoal hover:border-gallery-gold">
+                        정물화 (Still Life)
+                    </button>
+                    <button onclick="filterWorks('portrait')" data-filter="portrait" class="filter-btn px-6 py-2.5 rounded-full font-serif text-sm tracking-wider transition-all bg-white border border-gallery-border text-gallery-muted hover:text-gallery-charcoal hover:border-gallery-gold">
+                        인물 · 서사 (Figure & Narrative)
+                    </button>
+                </div>
+
+                <!-- 갤러리 작품 그리드 -->
+                <div id="works-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+                    <!-- JS로 동적 렌더링 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             PAGE 4: 방명록 (GUESTBOOK - localStorage 연동)
+             ========================================================= -->
+        <section id="page-guestbook" class="page-view hidden fade-in">
+            <div class="max-w-5xl mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-24">
+                <!-- 페이지 헤더 -->
+                <div class="text-center max-w-2xl mx-auto mb-14">
+                    <span class="font-display text-sm tracking-[0.3em] text-gallery-gold uppercase block mb-2">Visitor's Notes</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-medium text-gallery-charcoal mb-4">전시 방명록</h1>
+                    <p class="font-serif text-sm sm:text-base text-gallery-muted font-light">
+                        작품을 감상하신 소감이나 작가에게 전하고 싶은 따뜻한 메시지를 남겨주세요.
+                    </p>
+                </div>
+
+                <!-- 방명록 작성 폼 카드 -->
+                <div class="bg-white rounded-2xl border border-gallery-border p-6 sm:p-10 shadow-museum mb-16">
+                    <h2 class="font-serif text-xl font-medium text-gallery-charcoal mb-6 pb-4 border-b border-gallery-border flex items-center">
+                        <span class="w-2 h-2 rounded-full bg-gallery-gold mr-3"></span>
+                        감상평 남기기
+                    </h2>
+                    <form id="guestbook-form" onsubmit="handleGuestbookSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="gb-name" class="block font-serif text-sm text-gallery-charcoal mb-2">성함 (또는 닉네임) <span class="text-gallery-goldDark">*</span></label>
+                                <input 
+                                    type="text" 
+                                    id="gb-name" 
+                                    required 
+                                    maxlength="25"
+                                    placeholder="예: 김지현" 
+                                    class="w-full px-4 py-3 rounded-xl bg-gallery-cream border border-gallery-border text-gallery-charcoal text-sm focus:outline-none focus:border-gallery-gold focus:ring-1 focus:ring-gallery-gold transition-colors"
+                                >
+                            </div>
+                            <div>
+                                <label for="gb-work" class="block font-serif text-sm text-gallery-charcoal mb-2">인상 깊었던 작품 / 전시</label>
+                                <select 
+                                    id="gb-work" 
+                                    class="w-full px-4 py-3 rounded-xl bg-gallery-cream border border-gallery-border text-gallery-charcoal text-sm focus:outline-none focus:border-gallery-gold focus:ring-1 focus:ring-gallery-gold transition-colors"
+                                >
+                                    <option value="제12회 개인전 《오후의 정원, 빛의 잔상》">제12회 개인전 《오후의 정원, 빛의 잔상》</option>
+                                    <option value="지베르니의 아침 안개 (2026)">지베르니의 아침 안개 (2026)</option>
+                                    <option value="백자와 작약이 있는 정물 (2025)">백자와 작약이 있는 정물 (2025)</option>
+                                    <option value="창가의 독서, 오후 네 시 (2025)">창가의 독서, 오후 네 시 (2025)</option>
+                                    <option value="센 강의 황금빛 노을 (2024)">센 강의 황금빛 노을 (2024)</option>
+                                    <option value="프로방스의 라벤더 언덕 (2024)">프로방스의 라벤더 언덕 (2024)</option>
+                                    <option value="은잔과 복숭아의 조화 (2023)">은잔과 복숭아의 조화 (2023)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="gb-message" class="block font-serif text-sm text-gallery-charcoal mb-2">감상 메시지 <span class="text-gallery-goldDark">*</span></label>
+                            <textarea 
+                                id="gb-message" 
+                                rows="4" 
+                                required 
+                                maxlength="500"
+                                placeholder="작품에서 느낀 빛의 온기와 감상을 자유롭게 적어주세요..." 
+                                class="w-full px-4 py-3 rounded-xl bg-gallery-cream border border-gallery-border text-gallery-charcoal text-sm focus:outline-none focus:border-gallery-gold focus:ring-1 focus:ring-gallery-gold transition-colors resize-none"
+                            ></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                            <p id="gb-feedback" class="text-sm font-serif text-gallery-goldDark opacity-0 transition-opacity duration-300">
+                                소중한 감상평이 방명록에 등록되었습니다.
+                            </p>
+                            <button 
+                                type="submit" 
+                                class="px-8 py-3.5 rounded-xl bg-gallery-charcoal text-gallery-cream font-serif text-sm tracking-widest hover:bg-gallery-goldDark transition-colors shadow-sm cursor-pointer"
+                            >
+                                방명록 등록하기
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 등록된 방명록 목록 -->
+                <div>
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="font-serif text-xl font-medium text-gallery-charcoal">
+                            관람객 메시지 <span id="gb-count" class="font-display text-gallery-goldDark ml-1.5">0</span>
+                        </h3>
+                        <span class="text-xs text-gallery-muted font-serif">최신순 정렬</span>
+                    </div>
+
+                    <div id="guestbook-list" class="space-y-5">
+                        <!-- JS로 렌더링 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================================
+         작품 상세 보기 라이트박스 모달 (LIGHTBOX MODAL)
+         ========================================================= -->
+    <div id="artwork-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-10 bg-gallery-charcoal/80 backdrop-blur-sm transition-opacity" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="relative w-full max-w-5xl max-h-[92vh] bg-gallery-cream rounded-2xl border border-gallery-border shadow-2xl overflow-y-auto fade-in">
+            <!-- 닫기 버튼 -->
+            <button onclick="closeArtworkModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 border border-gallery-border flex items-center justify-center text-gallery-charcoal hover:bg-gallery-gold hover:text-white transition-colors shadow-sm" aria-label="닫기">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                <!-- 왼쪽: 액자 프레임에 담긴 고해상도 원화 이미지 -->
+                <div class="lg:col-span-7 bg-gallery-ivory p-6 sm:p-10 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-gallery-border">
+                    <div class="classical-frame rounded-lg max-w-full">
+                        <img id="modal-image" src="" alt="" class="max-h-[60vh] w-auto object-contain rounded">
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 작품 명세 및 작가 해설 -->
+                <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
+                    <div>
+                        <span id="modal-category" class="inline-block px-3 py-1 rounded-full bg-gallery-gold/15 text-gallery-goldDark font-serif text-xs tracking-wider mb-3"></span>
+                        <h2 id="modal-title" class="font-serif text-2xl sm:text-3xl font-medium text-gallery-charcoal leading-snug mb-1"></h2>
+                        <p id="modal-en-title" class="font-display italic text-base text-gallery-muted mb-6"></p>
+
+                        <!-- 작품 스펙 테이블 -->
+                        <div class="border-t border-b border-gallery-border py-4 space-y-2.5 text-sm mb-6">
+                            <div class="flex justify-between">
+                                <span class="font-serif text-gallery-muted">제작연도</span>
+                                <span id="modal-year" class="font-display font-semibold text-gallery-charcoal"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-serif text-gallery-muted">재료 및 기법</span>
+                                <span id="modal-medium" class="text-gallery-charcoal text-right"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-serif text-gallery-muted">작품 크기</span>
+                                <span id="modal-dimensions" class="font-display text-gallery-charcoal"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-serif text-gallery-muted">소장 상태</span>
+                                <span id="modal-status" class="text-gallery-goldDark font-medium"></span>
+                            </div>
+                        </div>
+
+                        <!-- 작품 해설 -->
+                        <div>
+                            <h3 class="font-serif text-xs uppercase tracking-widest text-gallery-goldDark mb-2">Curatorial Note · 작품 해설</h3>
+                            <p id="modal-description" class="font-serif text-sm text-gallery-charcoal/85 leading-[1.85] font-light"></p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-gallery-border flex items-center justify-between gap-3">
+                        <button onclick="goToGuestbookWithWork()" class="flex-1 py-3 px-4 rounded-xl bg-gallery-charcoal text-gallery-cream font-serif text-xs sm:text-sm tracking-wider hover:bg-gallery-goldDark transition-colors text-center">
+                            이 작품의 감상평 남기기
+                        </button>
+                        <button onclick="closeArtworkModal()" class="py-3 px-5 rounded-xl border border-gallery-border bg-white text-gallery-charcoal font-serif text-xs sm:text-sm hover:bg-gallery-ivory transition-colors">
+                            닫기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 푸터 -->
+    <footer class="bg-gallery-ivory border-t border-gallery-border mt-auto">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <p class="font-display text-xl tracking-[0.15em] font-semibold text-gallery-charcoal">ATELIER LUMIÈRE</p>
+                    <p class="font-serif text-xs text-gallery-muted mt-1">서양화가 윤서연 공식 포트폴리오 · 서울특별시 종로구 평창동 아틀리에</p>
+                </div>
+                <div class="flex items-center space-x-6 font-serif text-xs text-gallery-muted">
+                    <button onclick="navigateTo('home')" class="hover:text-gallery-goldDark transition-colors">홈</button>
+                    <button onclick="navigateTo('about')" class="hover:text-gallery-goldDark transition-colors">자기소개</button>
+                    <button onclick="navigateTo('works')" class="hover:text-gallery-goldDark transition-colors">작품소개</button>
+                    <button onclick="navigateTo('guestbook')" class="hover:text-gallery-goldDark transition-colors">방명록</button>
+                </div>
+                <div class="text-center md:text-right text-xs text-gallery-muted font-display tracking-wider">
+                    <p>Contact: atelier.lumiere@example.com</p>
+                    <p class="mt-1">© 2026 Yoon Seoyeon. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         JAVASCRIPT: 데이터, SPA 라우팅, 갤러리 필터링, 방명록 기능
+         ========================================================= -->
+    <script>
+        // 1. 서양화 작품 데이터베이스 (고품질 클래식 유화 아트워크 이미지)
+        const artworksData = [
+            {
+                id: 1,
+                title: "지베르니의 아침 안개",
+                enTitle: "Morning Mist in Giverny",
+                year: "2026",
+                category: "landscape",
+                categoryLabel: "풍경화 · Landscape",
+                medium: "Oil on linen canvas (리넨 위 유채)",
+                dimensions: "116.8 × 91.0 cm (50F)",
+                status: "갤러리 뤼미에르 전시중",
+                featured: true,
+                image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1200&q=85",
+                description: "이른 새벽 물안개가 피어오르는 연못과 수련의 반영을 포착한 작품입니다. 옅은 진주빛 아이보리와 연녹색의 겹침을 통해 고요한 아침 공기의 투명한 온도를 섬세한 붓 터치로 담아냈습니다."
+            },
+            {
+                id: 2,
+                title: "백자와 작약이 있는 정물",
+                enTitle: "Still Life with White Porcelain and Peonies",
+                year: "2025",
+                category: "still-life",
+                categoryLabel: "정물화 · Still Life",
+                medium: "Oil on canvas (캔버스 위 유채)",
+                dimensions: "90.9 × 72.7 cm (30F)",
+                status: "개인 소장 (Private Collection)",
+                featured: true,
+                image: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=1200&q=85",
+                description: "고전 네덜란드 정물화의 빛의 대비에서 영감을 받아, 은은한 달항아리 백자와 만개한 분홍빛 작약의 우아한 조화를 그렸습니다. 꽃잎의 부드러운 질감을 살리기 위해 나이프와 세필을 교차하여 완성했습니다."
+            },
+            {
+                id: 3,
+                title: "창가의 독서, 오후 네 시",
+                enTitle: "Reading by the Window, 4 PM",
+                year: "2025",
+                category: "portrait",
+                categoryLabel: "인물 · 서사 · Figure",
+                medium: "Oil on linen canvas (리넨 위 유채)",
+                dimensions: "130.3 × 97.0 cm (60F)",
+                status: "작가 소장 (Artist's Collection)",
+                featured: true,
+                image: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=1200&q=85",
+                description: "오후의 비스듬한 햇살이 스며드는 실내에서 사유에 잠긴 인물을 묘사한 서사적 인물화입니다. 옷자락에 머무는 따뜻한 금빛 여운과 차분한 배경의 명암이 고전 회화 특유의 평온함을 자아냅니다."
+            },
+            {
+                id: 4,
+                title: "센 강의 황금빛 노을",
+                enTitle: "Golden Sunset over the Seine",
+                year: "2024",
+                category: "landscape",
+                categoryLabel: "풍경화 · Landscape",
+                medium: "Oil on canvas (캔버스 위 유채)",
+                dimensions: "100.0 × 80.3 cm (40F)",
+                status: "개인 소장 (Private Collection)",
+                featured: false,
+                image: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1200&q=85",
+                description: "파리 체류 시절 매일 산책하던 센 강변의 황혼을 기록한 연작 중 하나입니다. 수면 위로 부서지는 앰버 골드와 코발트 블루의 보색 대비를 두터운 마티에르로 표현했습니다."
+            },
+            {
+                id: 5,
+                title: "은잔과 복숭아의 조화",
+                enTitle: "Harmony of Silver Goblet and Peaches",
+                year: "2024",
+                category: "still-life",
+                categoryLabel: "정물화 · Still Life",
+                medium: "Oil on wood panel (목판 위 유채)",
+                dimensions: "65.1 × 53.0 cm (15F)",
+                status: "갤러리 뤼미에르 전시중",
+                featured: false,
+                image: "https://images.unsplash.com/photo-1582561424760-0321d75e81fa?auto=format&fit=crop&w=1200&q=85",
+                description: "목판 패널 위에 고전 글레이징 기법을 충실히 적용하여 금속의 차가운 반사광과 과실의 벨벳 같은 온기를 대비시킨 정밀 정물화입니다."
+            },
+            {
+                id: 6,
+                title: "음악가의 선율",
+                enTitle: "Melody of the Musician",
+                year: "2023",
+                category: "portrait",
+                categoryLabel: "인물 · 서사 · Figure",
+                medium: "Oil on canvas (캔버스 위 유채)",
+                dimensions: "116.8 × 80.3 cm (50M)",
+                status: "국립현대미술관 미술은행 소장",
+                featured: false,
+                image: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&w=1200&q=85",
+                description: "악기를 연주하는 순간의 몰입과 선율의 파동을 유려한 붓질의 리듬으로 시각화한 작품입니다. 절제된 색채 속에서 인물의 내면적 울림을 담아냈습니다."
+            }
+        ];
+
+        // 2. 기본 방명록 초기 데이터
+        const defaultGuestbookEntries = [
+            {
+                id: 101,
+                name: "박서진 미술평론가",
+                work: "제12회 개인전 《오후의 정원, 빛의 잔상》",
+                message: "윤서연 작가의 화면에는 시대를 거슬러 올라가는 고전적 품격과 오늘날의 숨결이 동시에 깃들어 있습니다. 특히 겹겹이 쌓아 올린 유화층에서 배어 나오는 은은한 금빛 광채는 관람객의 발길을 오래도록 붙잡습니다.",
+                date: "2026. 11. 12"
+            },
+            {
+                id: 102,
+                name: "이현우",
+                work: "지베르니의 아침 안개 (2026)",
+                message: "삼청동 전시에서 원화를 직접 마주하고 큰 감동을 받았습니다. 사진으로 볼 때보다 물감의 질감과 아침 안개의 포근한 색감이 훨씬 입체적으로 다가오네요. 좋은 작품 감사합니다.",
+                date: "2026. 11. 11"
+            },
+            {
+                id: 103,
+                name: "최수아",
+                work: "백자와 작약이 있는 정물 (2025)",
+                message: "고풍스러운 유럽 미술관에 온 듯한 차분하고 우아한 분위기가 너무 좋습니다. 백자와 꽃잎에 맺힌 부드러운 빛 표현을 보며 마음까지 평온해졌습니다. 앞으로의 전시도 응원하겠습니다!",
+                date: "2026. 11. 10"
+            }
+        ];
+
+        let currentSelectedModalWork = null;
+
+        // 3. 페이지 뷰 전환 (SPA 내비게이션)
+        function navigateTo(pageId) {
+            // 모든 페이지 숨김
+            document.querySelectorAll('.page-view').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // 대상 페이지 표시 및 애니메이션 재적용
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                targetPage.classList.remove('fade-in');
+                void targetPage.offsetWidth; // Reflow 트리거
+                targetPage.classList.add('fade-in');
+            }
+
+            // 데스크톱 네비게이션 활성 상태 업데이트
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                const indicator = btn.querySelector('.nav-indicator');
+                if (btn.dataset.nav === pageId) {
+                    btn.classList.remove('text-gallery-muted');
+                    btn.classList.add('text-gallery-charcoal', 'font-medium');
+                    if (indicator) indicator.classList.replace('scale-x-0', 'scale-x-100');
+                } else {
+                    btn.classList.remove('text-gallery-charcoal', 'font-medium');
+                    btn.classList.add('text-gallery-muted');
+                    if (indicator) indicator.classList.replace('scale-x-100', 'scale-x-0');
+                }
+            });
+
+            // 모바일 네비게이션 활성 상태 업데이트
+            document.querySelectorAll('[data-mobile-nav]').forEach(btn => {
+                if (btn.dataset.mobileNav === pageId) {
+                    btn.classList.add('text-gallery-gold', 'font-medium', 'bg-gallery-ivory/70');
+                    btn.classList.remove('text-gallery-charcoal');
+                } else {
+                    btn.classList.remove('text-gallery-gold', 'font-medium', 'bg-gallery-ivory/70');
+                    btn.classList.add('text-gallery-charcoal');
+                }
+            });
+
+            // 상단으로 부드럽게 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 모바일 메뉴 토글
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // 4. 작품 카드 HTML 생성 헬퍼
+        function createArtworkCardHTML(art) {
+            return `
+                <article onclick="openArtworkModal(${art.id})" class="group cursor-pointer flex flex-col">
+                    <div class="classical-frame rounded-xl overflow-hidden mb-5">
+                        <div class="relative aspect-[4/5] overflow-hidden rounded bg-gallery-ivory">
+                            <img 
+                                src="${art.image}" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x1000/F3EFEA/68635E?text=${encodeURIComponent(art.title)}';"
+                                alt="${art.title}" 
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                                loading="lazy"
+                            >
+                            <div class="absolute inset-0 bg-gallery-charcoal/0 group-hover:bg-gallery-charcoal/15 transition-colors duration-300 flex items-end justify-end p-4">
+                                <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3.5 py-1.5 rounded-full bg-white/95 text-gallery-charcoal font-serif text-xs shadow-sm">
+                                    작품 상세 보기 +
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-1">
+                        <div class="flex items-center justify-between text-xs text-gallery-goldDark font-serif mb-1">
+                            <span>${art.categoryLabel.split('·')[0].trim()}</span>
+                            <span class="font-display text-gallery-muted">${art.year}</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-medium text-gallery-charcoal group-hover:text-gallery-goldDark transition-colors">
+                            ${art.title}
+                        </h3>
+                        <p class="text-xs text-gallery-muted mt-1 font-display tracking-wide">
+                            ${art.medium.split('(')[0].trim()} · ${art.dimensions.split('(')[0].trim()}
+                        </p>
+                    </div>
+                </article>
+            `;
+        }
+
+        // 홈 화면 대표작 3점 렌더링
+        function renderFeaturedWorks() {
+            const container = document.getElementById('home-featured-works');
+            const featured = artworksData.filter(art => art.featured).slice(0, 3);
+            container.innerHTML = featured.map(createArtworkCardHTML).join('');
+        }
+
+        // 작품소개 페이지 갤러리 렌더링 및 필터링
+        function filterWorks(category) {
+            // 필터 버튼 스타일 업데이트
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.className = "filter-btn px-6 py-2.5 rounded-full font-serif text-sm tracking-wider transition-all bg-gallery-charcoal text-gallery-cream shadow-sm";
+                } else {
+                    btn.className = "filter-btn px-6 py-2.5 rounded-full font-serif text-sm tracking-wider transition-all bg-white border border-gallery-border text-gallery-muted hover:text-gallery-charcoal hover:border-gallery-gold";
+                }
+            });
+
+            const grid = document.getElementById('works-grid');
+            const filtered = category === 'all' 
+                ? artworksData 
+                : artworksData.filter(art => art.category === category);
+
+            grid.innerHTML = filtered.map(createArtworkCardHTML).join('');
+        }
+
+        // 5. 라이트박스 모달 열기 / 닫기
+        function openArtworkModal(id) {
+            const art = artworksData.find(item => item.id === id);
+            if (!art) return;
+
+            currentSelectedModalWork = `${art.title} (${art.year})`;
+
+            document.getElementById('modal-image').src = art.image;
+            document.getElementById('modal-image').alt = art.title;
+            document.getElementById('modal-category').textContent = art.categoryLabel;
+            document.getElementById('modal-title').textContent = art.title;
+            document.getElementById('modal-en-title').textContent = art.enTitle;
+            document.getElementById('modal-year').textContent = art.year;
+            document.getElementById('modal-medium').textContent = art.medium;
+            document.getElementById('modal-dimensions').textContent = art.dimensions;
+            document.getElementById('modal-status').textContent = art.status;
+            document.getElementById('modal-description').textContent = art.description;
+
+            const modal = document.getElementById('artwork-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArtworkModal() {
+            const modal = document.getElementById('artwork-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // 모달에서 '이 작품의 감상평 남기기' 클릭 시 방명록 페이지로 이동 및 작품 자동 선택
+        function goToGuestbookWithWork() {
+            closeArtworkModal();
+            navigateTo('guestbook');
+            const selectEl = document.getElementById('gb-work');
+            if (currentSelectedModalWork && selectEl) {
+                for (let i = 0; i < selectEl.options.length; i++) {
+                    if (selectEl.options[i].value === currentSelectedModalWork) {
+                        selectEl.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            setTimeout(() => {
+                document.getElementById('gb-name').focus();
+            }, 400);
+        }
+
+        // 모달 바깥 배경 클릭 및 ESC 키 닫기 지원
+        document.getElementById('artwork-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeArtworkModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeArtworkModal();
+        });
+
+        // 6. 방명록 데이터 관리 (localStorage 연동)
+        function getGuestbookEntries() {
+            try {
+                const saved = localStorage.getItem('atelier_lumiere_guestbook');
+                if (saved) {
+                    return JSON.parse(saved);
+                }
+            } catch (e) {
+                console.warn('localStorage 접근 제한:', e);
+            }
+            return [...defaultGuestbookEntries];
+        }
+
+        function saveGuestbookEntries(entries) {
+            try {
+                localStorage.setItem('atelier_lumiere_guestbook', JSON.stringify(entries));
+            } catch (e) {
+                console.warn('localStorage 저장 제한:', e);
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(match) {
+                const escapeMap = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return escapeMap[match];
+            });
+        }
+
+        function renderGuestbook() {
+            const entries = getGuestbookEntries();
+            const listEl = document.getElementById('guestbook-list');
+            const countEl = document.getElementById('gb-count');
+
+            countEl.textContent = entries.length;
+
+            listEl.innerHTML = entries.map(entry => `
+                <div class="bg-white rounded-2xl border border-gallery-border p-6 sm:p-8 shadow-sm transition-all hover:border-gallery-gold/50">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3 pb-3 border-b border-gallery-ivory">
+                        <div class="flex items-center space-x-3">
+                            <span class="font-serif font-semibold text-gallery-charcoal text-base">${escapeHTML(entry.name)}</span>
+                            <span class="inline-block px-2.5 py-0.5 rounded-full bg-gallery-ivory text-gallery-goldDark font-serif text-xs">
+                                ${escapeHTML(entry.work)}
+                            </span>
+                        </div>
+                        <span class="font-display text-xs tracking-wider text-gallery-muted">${escapeHTML(entry.date)}</span>
+                    </div>
+                    <p class="font-serif text-sm sm:text-[15px] text-gallery-charcoal/85 leading-[1.85] font-light whitespace-pre-line">${escapeHTML(entry.message)}</p>
+                </div>
+            `).join('');
+        }
+
+        function handleGuestbookSubmit(event) {
+            event.preventDefault();
+
+            const nameInput = document.getElementById('gb-name');
+            const workSelect = document.getElementById('gb-work');
+            const messageInput = document.getElementById('gb-message');
+            const feedbackEl = document.getElementById('gb-feedback');
+
+            const name = nameInput.value.trim();
+            const work = workSelect.value;
+            const message = messageInput.value.trim();
+
+            if (!name || !message) return;
+
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}. ${String(now.getMonth() + 1).padStart(2, '0')}. ${String(now.getDate()).padStart(2, '0')}`;
+
+            const newEntry = {
+                id: Date.now(),
+                name: name,
+                work: work,
+                message: message,
+                date: dateStr
+            };
+
+            const entries = getGuestbookEntries();
+            entries.unshift(newEntry);
+            saveGuestbookEntries(entries);
+            renderGuestbook();
+
+            // 폼 초기화 및 등록 안내 메시지 표시
+            nameInput.value = '';
+            messageInput.value = '';
+            feedbackEl.classList.remove('opacity-0');
+            setTimeout(() => {
+                feedbackEl.classList.add('opacity-0');
+            }, 3500);
+        }
+
+        // 초기 렌더링 실행
+        window.addEventListener('DOMContentLoaded', () => {
+            renderFeaturedWorks();
+            filterWorks('all');
+            renderGuestbook();
+        });
+    </script>
+</body>
+</html>
